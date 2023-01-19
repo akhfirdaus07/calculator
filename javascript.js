@@ -35,11 +35,15 @@ for(let operator of operators){
     operator.addEventListener("click", opToDisplay)
 }
 function opToDisplay(){
-    history.textContent=active.textContent+this.textContent;
+    result=calc();
+    if(result==null){
+        history.textContent=active.textContent+this.textContent;
+    }
+    else{
+        history.textContent=result+this.textContent;
+    }
     active.textContent="";
 }
-
-
 
 
 // Add clear button function
@@ -86,11 +90,6 @@ function calc(){
     let o=history.textContent.slice(-1);
     let x=parseFloat(history.textContent.slice(0, -1));
     let y=parseFloat(active.textContent);
-
-    console.log(o)
-    console.log(x)
-    console.log(y)
-    
     if (o == '+') {  
         return x+y;  
     } else if (o == '-') {
