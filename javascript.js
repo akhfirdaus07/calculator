@@ -69,22 +69,6 @@ function addPlusMinus(){
 }
 
 // Add operators functions
-function add(x,y){
-    return x+y;
-}
-function subtract(x,y){
-    return x-y;
-} 
-function multiply(x,y){
-    return x*y;
-} 
-function divide(x,y){
-    return x/y;
-} 
-function mod(x,y){
-    return x%y;
-}
-
 function operate(){
     let o=history.textContent.slice(-1);
     let x=parseFloat(history.textContent.slice(0, -1));
@@ -99,7 +83,7 @@ function operate(){
         if(y==0){
             return alert("You can't divide by zero")
         }
-        return Math.round(x/y*100)/100;
+        return (Math.round(x/y*1000)/1000);
     } else if(o == "%") {
         return x%y;
     } else{
@@ -113,6 +97,48 @@ const equal=document.querySelector(".equal")
 equal.addEventListener("click", equalDisplay)
 function equalDisplay(){
     result=operate();
-    history.textContent+=active.textContent+this.textContent;
+    history.textContent+=active.textContent+"=";
     active.textContent=result;
 }
+
+// Add keyboard support
+let shouldResetScreen = false;
+let currentOperation = null;
+let firstOperand = ''
+let secondOperand = ''
+
+window.addEventListener('keydown', handleKeyboardInput);
+
+function handleKeyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key)
+    if (e.key === '.') appendPoint()
+    if (e.key === '=' || e.key === 'Enter') equalDisplay()
+    if (e.key === 'Backspace') undoDisplay()
+    if (e.key === 'Escape') clearDisplay()
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') convertOperator(e.key)
+}
+  
+function appendNumber(number) {
+   if (active.textContent === '0' || shouldResetScreen) resetScreen()
+   active.textContent += number
+}
+
+function appendPoint() {
+    if (shouldResetScreen) resetScreen()
+    if (active.textContent === '') active.textContent = '0'
+    if (active.textContent.includes('.')) return active.textContent += '.'
+}
+
+function resetScreen() {
+    active.textContent = ''
+    shouldResetScreen = false
+}
+
+function convertOperator(keyboardOperator) {
+    if (keyboardOperator === '/') history.textContent=active.textContent+'÷';
+    if (keyboardOperator === '*') history.textContent=active.textContent+'x';
+    if (keyboardOperator === '-') history.textContent=active.textContent+'-';
+    if (keyboardOperator === '+') history.textContent=active.textContent+'+';
+    operate()
+    shouldResetScreen = true
+}  
