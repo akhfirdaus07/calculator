@@ -27,14 +27,13 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    align-content: space-around;
-    gap:5px;
+    gap:3px;
 }
 
 .display {
-    flex:2;
+    height: 100%;
     width: 100%;
+    
     background-color: aliceblue;
     border: 3px solid black;
     border-radius: 10px;
@@ -65,12 +64,12 @@ h1 {
 
 }
 
-.tool.undo{
+.tool#undo{
     background-color: rgb(242, 167, 29);
     color: white;
 }
 
-.tool.clear{
+.tool#clear{
     background-color:rgb(240, 32, 32);
     color: white;
 }
