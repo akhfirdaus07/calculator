@@ -90,7 +90,7 @@ function calc(){
     console.log(o)
     console.log(x)
     console.log(y)
-
+    
     if (o == '+') {  
         return x+y;  
     } else if (o == '-') {
@@ -98,7 +98,10 @@ function calc(){
     } else if (o == '*') { 
         return x*y;
     } else if(o =="/") {  
-        return x/y;
+        if(y==0){
+            return alert("You can't divide by zero")
+        }
+        return Math.round(x/y*100)/100;
     } else if(o == "%") {
         return x%y;
     } else{
