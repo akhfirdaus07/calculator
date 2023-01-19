@@ -35,7 +35,7 @@ for(let operator of operators){
     operator.addEventListener("click", opToDisplay)
 }
 function opToDisplay(){
-    result=calc();
+    result=operate();
     if(result==null){
         history.textContent=active.textContent+this.textContent;
     }
@@ -52,7 +52,6 @@ clear.addEventListener("click", clearDisplay)
 function clearDisplay(){
     active.textContent="";
     history.textContent="";
-    
 }
 
 // Add undo button function
@@ -86,7 +85,7 @@ function mod(x,y){
     return x%y;
 }
 
-function calc(){
+function operate(){
     let o=history.textContent.slice(-1);
     let x=parseFloat(history.textContent.slice(0, -1));
     let y=parseFloat(active.textContent);
@@ -94,7 +93,7 @@ function calc(){
         return x+y;  
     } else if (o == '-') {
         return x-y;
-    } else if (o == '*') { 
+    } else if (o == 'x') { 
         return x*y;
     } else if(o =="/") {  
         if(y==0){
@@ -113,7 +112,7 @@ function calc(){
 const equal=document.querySelector(".equal")
 equal.addEventListener("click", equalDisplay)
 function equalDisplay(){
-    result=calc();
+    result=operate();
     history.textContent+=active.textContent+this.textContent;
     active.textContent=result;
 }
