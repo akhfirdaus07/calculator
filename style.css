@@ -53,6 +53,10 @@ h1 {
     font-size:30px
 }
 
+.history, .active{
+    padding-right: 5px;
+}
+
 .buttons {
     display: flex;
     justify-content: space-evenly;

@@ -23,7 +23,11 @@ for(let number of numbers){
     number.addEventListener("click", numToDisplay)
 }
 function numToDisplay(){
-    active.textContent+=this.textContent
+    if(active.textContent==0){
+        active.textContent=this.textContent;
+    } else{
+    active.textContent+=this.textContent;
+    }
 }
 
 for(let operator of operators){
@@ -51,10 +55,15 @@ function undoDisplay(){
 }
 
 // Add plusMinus button function
+const plusMinus=document.querySelector(".plusMinus");
+plusMinus.addEventListener("click", addPlusMinus);
+function addPlusMinus(){
+    active.textContent = parseInt(active.textContent)*-1;
+}
 
 // Add decimal button function
 
-// Add operators function
+// Add operators functions
 function add(x,y){
     return x+y;
 }
