@@ -14,6 +14,7 @@ function mouseoutEffect(){
     this.style.opacity=1;
 }
 
+
 // Add display function
 const history=document.querySelector(".history");
 const active=document.querySelector(".active");
@@ -38,6 +39,9 @@ function opToDisplay(){
     active.textContent="";
 }
 
+
+
+
 // Add clear button function
 const clear=document.querySelector("#clear");
 clear.addEventListener("click", clearDisplay)
@@ -61,8 +65,6 @@ function addPlusMinus(){
     active.textContent = parseInt(active.textContent)*-1;
 }
 
-// Add decimal button function
-
 // Add operators functions
 function add(x,y){
     return x+y;
@@ -78,4 +80,38 @@ function divide(x,y){
 } 
 function mod(x,y){
     return x%y;
+}
+
+function calc(){
+    let o=history.textContent.slice(-1);
+    let x=parseFloat(history.textContent.slice(0, -1));
+    let y=parseFloat(active.textContent);
+
+    console.log(o)
+    console.log(x)
+    console.log(y)
+
+    if (o == '+') {  
+        return x+y;  
+    } else if (o == '-') {
+        return x-y;
+    } else if (o == '*') { 
+        return x*y;
+    } else if(o =="/") {  
+        return x/y;
+    } else if(o == "%") {
+        return x%y;
+    } else{
+        return null;
+    }
+}
+
+
+// Add equal button function
+const equal=document.querySelector(".equal")
+equal.addEventListener("click", equalDisplay)
+function equalDisplay(){
+    result=calc();
+    history.textContent+=active.textContent+this.textContent;
+    active.textContent=result;
 }
