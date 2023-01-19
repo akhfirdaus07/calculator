@@ -15,29 +15,58 @@ function mouseoutEffect(){
 }
 
 // Add display function
-const display=document.querySelector(".display");
+const history=document.querySelector(".history");
+const active=document.querySelector(".active");
 const numbers=document.querySelectorAll(".num");
 const operators=document.querySelectorAll(".operator")
 for(let number of numbers){
-    number.addEventListener("click", clickToDisplay)
+    number.addEventListener("click", numToDisplay)
 }
+function numToDisplay(){
+    active.textContent+=this.textContent
+}
+
 for(let operator of operators){
-    operator.addEventListener("click", clickToDisplay)
+    operator.addEventListener("click", opToDisplay)
 }
-function clickToDisplay(){
-    display.textContent+=this.textContent
+function opToDisplay(){
+    history.textContent=active.textContent+this.textContent;
+    active.textContent="";
 }
 
 // Add clear button function
 const clear=document.querySelector("#clear");
 clear.addEventListener("click", clearDisplay)
 function clearDisplay(){
-    display.textContent="";
+    active.textContent="";
+    history.textContent="";
+    
 }
 
 // Add undo button function
 const undo=document.querySelector("#undo");
 undo.addEventListener("click", undoDisplay)
 function undoDisplay(){
-    display.textContent=display.textContent.substring(0,display.textContent.length-1)
+    active.textContent=active.textContent.substring(0,active.textContent.length-1)
+}
+
+// Add plusMinus button function
+
+// Add decimal button function
+
+// Add operators function
+function add(x,y){
+    return x+y;
+}
+function subtract(x,y){
+    return x-y;
+} 
+function multiply(x,y){
+    return x*y;
+} 
+function divide(x,y){
+    return x/y;
+} 
+function mod(x,y){
+    return x%y;
 }
